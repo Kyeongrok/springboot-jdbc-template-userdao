@@ -38,6 +38,7 @@ public class UserController {
 
     @DeleteMapping("")
     public ResponseEntity<Integer> deleteAll() {
+
         return ResponseEntity
                 .ok()
                 .body(userDao.deleteAll());
