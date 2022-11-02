@@ -2,6 +2,7 @@ package com.springboot.hello.parser;
 
 import com.springboot.hello.dao.HospitalDao;
 import com.springboot.hello.domain.Hospital;
+import com.springboot.hello.service.HospitalService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -28,37 +29,40 @@ class HospitalParserTest {
     @Autowired // HospitalDao는 Factory도 없는데 왜 될까요?
     HospitalDao hospitalDao;
 
+    @Autowired
+    HospitalService hospitalService;
+
     @Test
     @DisplayName("Hospital이 insert가 잘 되고, select도 잘 되는지")
     void addAndGet() {
-        hospitalDao.deleteAll();
-        assertEquals(0, hospitalDao.getCount());
-        HospitalParser hp = new HospitalParser();
-        Hospital hospital = hp.parse(line1);
-        hospitalDao.add(hospital);
-        assertEquals(1, hospitalDao.getCount());
-
-        Hospital selectedHospital = hospitalDao.findById(hospital.getId());
-        assertEquals(selectedHospital.getId(), hospital.getId());
-        assertEquals(selectedHospital.getOpenServiceName(), hospital.getOpenServiceName());
-
-        assertEquals(selectedHospital.getOpenLocalGovernmentCode(),hospital.getOpenLocalGovernmentCode());
-        assertEquals(selectedHospital.getManagementNumber(),hospital.getManagementNumber());
-        assertEquals(selectedHospital.getBusinessStatus(), hospital.getBusinessStatus()); // idx:7
-        assertEquals(selectedHospital.getBusinessStatusCode(), hospital.getBusinessStatusCode());
-
-        assertTrue(selectedHospital.getLicenseDate().isEqual(hospital.getLicenseDate()));
-
-        assertEquals(selectedHospital.getPhone(), hospital.getPhone());
-        assertEquals(selectedHospital.getFullAddress(), hospital.getFullAddress());
-        assertEquals(selectedHospital.getRoadNameAddress(), hospital.getRoadNameAddress());
-        assertEquals(selectedHospital.getHospitalName(), hospital.getHospitalName());
-        assertEquals(selectedHospital.getBusinessTypeName(), hospital.getBusinessTypeName());
-        assertEquals(selectedHospital.getHealthcareProviderCount(), hospital.getHealthcareProviderCount());
-        assertEquals(selectedHospital.getPatientRoomCount(), hospital.getPatientRoomCount());
-        assertEquals(selectedHospital.getTotalNumberOfBeds(), hospital.getTotalNumberOfBeds());
-        // 날짜, float
-        assertEquals(selectedHospital.getTotalAreaSize(), hospital.getTotalAreaSize());
+//        hospitalDao.deleteAll();
+//        assertEquals(0, hospitalDao.getCount());
+//        HospitalParser hp = new HospitalParser();
+//        Hospital hospital = hp.parse(line1);
+//        hospitalDao.add(hospital);
+//        assertEquals(1, hospitalDao.getCount());
+//
+//        Hospital selectedHospital = hospitalDao.findById(hospital.getId());
+//        assertEquals(selectedHospital.getId(), hospital.getId());
+//        assertEquals(selectedHospital.getOpenServiceName(), hospital.getOpenServiceName());
+//
+//        assertEquals(selectedHospital.getOpenLocalGovernmentCode(),hospital.getOpenLocalGovernmentCode());
+//        assertEquals(selectedHospital.getManagementNumber(),hospital.getManagementNumber());
+//        assertEquals(selectedHospital.getBusinessStatus(), hospital.getBusinessStatus()); // idx:7
+//        assertEquals(selectedHospital.getBusinessStatusCode(), hospital.getBusinessStatusCode());
+//
+//        assertTrue(selectedHospital.getLicenseDate().isEqual(hospital.getLicenseDate()));
+//
+//        assertEquals(selectedHospital.getPhone(), hospital.getPhone());
+//        assertEquals(selectedHospital.getFullAddress(), hospital.getFullAddress());
+//        assertEquals(selectedHospital.getRoadNameAddress(), hospital.getRoadNameAddress());
+//        assertEquals(selectedHospital.getHospitalName(), hospital.getHospitalName());
+//        assertEquals(selectedHospital.getBusinessTypeName(), hospital.getBusinessTypeName());
+//        assertEquals(selectedHospital.getHealthcareProviderCount(), hospital.getHealthcareProviderCount());
+//        assertEquals(selectedHospital.getPatientRoomCount(), hospital.getPatientRoomCount());
+//        assertEquals(selectedHospital.getTotalNumberOfBeds(), hospital.getTotalNumberOfBeds());
+//        // 날짜, float
+//        assertEquals(selectedHospital.getTotalAreaSize(), hospital.getTotalAreaSize());
     }
 
     @Test
@@ -66,14 +70,12 @@ class HospitalParserTest {
     void oneHundreadThousandRows() throws IOException {
         // 서버환경에서 build할 때 문제가 생길 수 있습니다.
         // 어디에서든지 실행할 수 있게 짜는 것이 목표.
-        String filename = "C:\\Users\\ocean\\Desktop\\fulldata_01_01_02_P_의원_utf8.csv";
-        List<Hospital> hospitalList = hospitalReadLineContext.readByLine(filename);
-        assertTrue(hospitalList.size() > 1000);
-        assertTrue(hospitalList.size() > 10000);
-        for (int i = 0; i < 10; i++) {
-            System.out.println(hospitalList.get(i).getHospitalName());
-        }
-        System.out.printf("파싱된 데이터 개수:%d", hospitalList.size());
+//        hospitalDao.deleteAll();
+//        String filename = "C:\\Users\\ocean\\Desktop\\fulldata_01_01_02_P_의원_utf8.csv";
+//        int cnt = this.hospitalService.insertLargeVolumeHospitalData(filename);
+//        assertTrue(cnt > 1000);
+//        assertTrue(cnt > 10000);
+//        System.out.printf("파싱된 데이터 개수:%d", cnt);
     }
 
     @Test
