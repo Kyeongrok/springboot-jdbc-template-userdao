@@ -24,7 +24,7 @@ public class HospitalDao {
         hospital.setId(rs.getInt("id"));
         hospital.setOpenServiceName(rs.getString("open_service_name"));
         hospital.setOpenLocalGovernmentCode(rs.getInt("open_local_government_code"));
-        hospital.setManagementNumber(rs.getString("management number"));
+        hospital.setManagementNumber(rs.getString("management_number"));
         hospital.setLicenseDate(rs.getTimestamp("license_date").toLocalDateTime());
         hospital.setBusinessStatus(rs.getInt("business_status"));
         hospital.setBusinessStatusCode(rs.getInt("business_status_code"));

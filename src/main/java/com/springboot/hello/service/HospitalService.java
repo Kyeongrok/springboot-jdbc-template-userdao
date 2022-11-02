@@ -23,14 +23,12 @@ public class HospitalService {
         this.hospitalDao = hospitalDao;
     }
 
-    @Transactional
     public int insertLargeVolumeHospitalData(String filename) {
         List<Hospital> hospitalList;
         try {
             hospitalList = hospitalReadLineContext.readByLine(filename);
             System.out.println("파싱이 끝났습니다.");
             hospitalList.stream()
-                    .parallel()
                     .forEach(hospital -> {
                         try {
                             this.hospitalDao.add(hospital); // db에 insert하는 구간
